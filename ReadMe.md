@@ -1,1 +1,1 @@
-# devcouse JPA
+# devcourse JPA
