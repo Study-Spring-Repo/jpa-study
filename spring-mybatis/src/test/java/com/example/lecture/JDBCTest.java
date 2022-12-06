@@ -16,7 +16,7 @@ import java.sql.Statement;
 public class JDBCTest {
 
     static final String JDBC_DRIVER = "org.h2.Driver";
-    static final String DB_URL = "jdbc:h2:~/test";
+    static final String DB_URL = "jdbc:h2:mem:test";
     static final String USER = "sa";
     static final String PASS = "1234";
 
