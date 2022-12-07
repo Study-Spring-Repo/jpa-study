@@ -35,7 +35,7 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "member_id", referencedColumnName = "id") // 연관 관계 주인
     private Member member;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     public void setMember(Member member) {

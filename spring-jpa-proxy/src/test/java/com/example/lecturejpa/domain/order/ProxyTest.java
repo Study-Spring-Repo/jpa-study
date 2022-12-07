@@ -77,4 +77,18 @@ public class ProxyTest {
         order.addOrderItem(item);
         transaction.commit(); // flush
     }
+
+    @Test
+    void orphan() {
+        EntityManager entityManager = emf.createEntityManager();
+
+        // 회원 조회 -> 회원의 주문 까지 조회
+        Member findMember = entityManager.find(Member.class, 1L);
+        findMember.getOrders().remove(0); // order를 제거한다. (고아객체)
+
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        transaction.begin();
+        transaction.commit();
+    }
 }
