@@ -19,11 +19,9 @@ public class OrderItem extends BaseEntity {
     private int price;
     private int quantity;
 
-    @Column(name = "order_id")
-    private String orderId;
-
-    @Column(name = "item_id")
-    private Long itemId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private Order order;
 
     @OneToMany(mappedBy = "orderItem")
     private List<Item> items = new ArrayList<>();
