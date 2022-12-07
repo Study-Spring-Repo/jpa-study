@@ -1,0 +1,42 @@
+2022-12-07 08:03:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table customers (id bigint not null, firstName varchar(255), lastName varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table customers (id bigint not null, firstName varchar(255), lastName varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2022-12-07 08:03:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMERS" not found (this database is empty); SQL statement:
+select c1_0.id,c1_0.firstName,c1_0.lastName from customers c1_0 where c1_0.id=? [42104-214]
+2022-12-07 08:04:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table customers (id bigint not null, firstName varchar(255), lastName varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table customers (id bigint not null, firstName varchar(255), lastName varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2022-12-07 08:04:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMERS" not found (this database is empty); SQL statement:
+select c1_0.id,c1_0.firstName,c1_0.lastName from customers c1_0 where c1_0.id=? [42104-214]
+2022-12-07 08:04:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table customers (id bigint not null, firstName varchar(255), lastName varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table customers (id bigint not null, firstName varchar(255), lastName varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2022-12-07 08:04:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMERS" not found (this database is empty); SQL statement:
+select c1_0.id,c1_0.firstName,c1_0.lastName from customers c1_0 where c1_0.id=? [42104-214]
+2022-12-07 08:05:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table customers (id bigint not null, firstName varchar(255), lastName varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table customers (id bigint not null, firstName varchar(255), lastName varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2022-12-07 08:05:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMERS" not found (this database is empty); SQL statement:
+select c1_0.id,c1_0.firstName,c1_0.lastName from customers c1_0 where c1_0.id=? [42104-214]
+2022-12-07 08:06:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table customers (id bigint not null, firstName varchar(255), lastName varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table customers (id bigint not null, firstName varchar(255), lastName varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2022-12-07 08:06:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMERS" not found (this database is empty); SQL statement:
+select c1_0.id,c1_0.firstName,c1_0.lastName from customers c1_0 where c1_0.id=? [42104-214]
+2022-12-07 08:07:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table customers (id bigint not null, firstName varchar(255), lastName varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table customers (id bigint not null, firstName varchar(255), lastName varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2022-12-07 08:07:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMERS" not found (this database is empty); SQL statement:
+select c1_0.id,c1_0.firstName,c1_0.lastName from customers c1_0 where c1_0.id=? [42104-214]
+2022-12-07 08:09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table customers (id bigint not null, firstName varchar(255), lastName varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table customers (id bigint not null, firstName varchar(255), lastName varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2022-12-07 08:09:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CUSTOMERS" not found (this database is empty); SQL statement:
+select c1_0.id,c1_0.firstName,c1_0.lastName from customers c1_0 where c1_0.id=? [42104-214]
