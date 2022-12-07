@@ -4,14 +4,19 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.weaver.ast.Or;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static com.example.lecturejpa.domain.order.OrderStatus.OPENED;
+import static java.time.LocalDateTime.now;
 
 @Slf4j
 @SpringBootTest
@@ -56,7 +61,7 @@ public class OrderPersistenceTest {
 
         Order order = new Order();
         order.setUuid(UUID.randomUUID().toString());
-        order.setOrderDatetime(LocalDateTime.now());
+        order.setOrderDatetime(now());
         order.setOrderStatus(OPENED);
         order.setMemo("부재시 전화주세요.");
         order.setMemberId(memberEntity.getId()); // 외래키를 직접 지정
@@ -69,5 +74,37 @@ public class OrderPersistenceTest {
         Member orderMemberEntity = entityManager.find(Member.class, orderEntity.getMemberId());
         // orderEntity.getMember() // 객체중심 설계라면 객체그래프 탐색을 해야하지 않을까?
         log.info("nick : {}", orderMemberEntity.getNickName());
+    }
+
+    @Test
+    void 연관관계_테스트() {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+
+        transaction.begin();
+        Member member = new Member();
+        member.setName("hyunseo");
+        member.setNickName("현서");
+        member.setAddress("서울시민수");
+        member.setAge(10);
+
+        em.persist(member);
+
+        Order order = new Order();
+        order.setUuid(UUID.randomUUID().toString());
+        order.setOrderStatus(OPENED);
+        order.setOrderDatetime(now());
+        order.setMemo("부재시 연락주세요.");
+        order.setMember(member);
+        member.setOrders(Lists.newArrayList(order));
+
+        em.persist(order);
+        transaction.commit();
+
+        em.clear();
+        Order entity = em.find(Order.class, order.getUuid());
+
+        log.info("{}", entity.getMember().getNickName());
+        log.info("{}", entity.getMember().getOrders().size());
     }
 }

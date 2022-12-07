@@ -4,9 +4,13 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "member")
-@Setter @Getter
+@Setter
+@Getter
 public class Member {
 
     @Id
@@ -19,7 +23,6 @@ public class Member {
     @Column(name = "nick_name", nullable = false, length = 30, unique = true)
     private String nickName;
 
-    @Column(name = "age", nullable = false)
     private int age;
 
     @Column(name = "address", nullable = false)
@@ -27,4 +30,11 @@ public class Member {
 
     @Column(name = "description")
     private String description;
+
+    @OneToMany(mappedBy = "member") // 객체의 필드명
+    List<Order> orders = new ArrayList<>();
+
+    public void addOrder(Order order) {
+        order.setMember(this);
+    }
 }
