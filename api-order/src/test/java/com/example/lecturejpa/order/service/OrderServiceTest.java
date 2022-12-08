@@ -3,15 +3,20 @@ package com.example.lecturejpa.order.service;
 import com.example.lecturejpa.domain.order.OrderRepository;
 import com.example.lecturejpa.domain.order.OrderStatus;
 import com.example.lecturejpa.order.dto.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
 @SpringBootTest
 class OrderServiceTest {
@@ -60,5 +65,34 @@ class OrderServiceTest {
 
         // Then
         assertThat(uuid).isEqualTo(savedUuid);
+    }
+    
+    @AfterEach
+    void tearDown() {
+        orderRepository.deleteAll();
+    }
+
+    @Test
+    void findOneTest() throws NotFoundException {
+        // Given
+        String orderUuid = uuid;
+
+        // When
+        OrderDto one = orderService.findOne(uuid);
+
+        // Then
+        assertThat(one.getUuid()).isEqualTo(orderUuid);
+    }
+
+    @Test
+    void findAllTest() {
+        // Given
+        PageRequest page = PageRequest.of(0, 10);
+
+        // When
+        Page<OrderDto> all = orderService.findAll(page);
+
+        // Then
+        assertThat(all.getTotalElements()).isEqualTo(1);
     }
 }

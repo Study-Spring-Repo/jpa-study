@@ -9,18 +9,17 @@ import java.util.List;
 
 @Entity
 @Table(name = "member")
-@Setter
 @Getter
-public class Member {
-
+@Setter
+public class Member extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "name", nullable = false, length = 30)
     private String name;
 
-    @Column(name = "nick_name", nullable = false, length = 30, unique = true)
+    @Column(nullable = false, length = 30, unique = true)
     private String nickName;
 
     private int age;
@@ -28,11 +27,11 @@ public class Member {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = true)
     private String description;
 
-    @OneToMany(mappedBy = "member") // 객체의 필드명
-    List<Order> orders = new ArrayList<>();
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
 
     public void addOrder(Order order) {
         order.setMember(this);

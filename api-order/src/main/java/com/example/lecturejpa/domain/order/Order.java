@@ -14,7 +14,6 @@ import java.util.Objects;
 @Getter
 @Setter
 public class Order extends BaseEntity {
-
     @Id
     @Column(name = "id")
     private String uuid;
@@ -28,19 +27,16 @@ public class Order extends BaseEntity {
     @Lob
     private String memo;
 
-    @Column(name = "member_id", insertable = false, updatable = false) // fk
-    private Long memberId;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "member_id", referencedColumnName = "id") // 연관 관계 주인
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "member_id", referencedColumnName = "id")
     private Member member;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     public void setMember(Member member) {
-        if (Objects.nonNull(this.member)) {
-            member.getOrders().remove(this);
+        if(Objects.nonNull(this.member)) {
+            this.member.getOrders().remove(this);
         }
 
         this.member = member;
@@ -48,7 +44,6 @@ public class Order extends BaseEntity {
     }
 
     public void addOrderItem(OrderItem orderItem) {
-        orderItems.add(orderItem);
         orderItem.setOrder(this);
     }
 }

@@ -5,8 +5,13 @@ import com.example.lecturejpa.domain.order.OrderRepository;
 import com.example.lecturejpa.order.converter.OrderConverter;
 import com.example.lecturejpa.order.dto.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+
 
 @Service
 public class OrderService {
@@ -18,11 +23,9 @@ public class OrderService {
     private OrderConverter orderConverter;
 
     /**
-     * tx.begin()
      * 1. dto -> entity 변환 (준영속)
      * 2. orderRepository.save(entity) -> 영속화
      * 3. 결과 반환
-     * tx.commit()
      */
     @Transactional
     public String save(OrderDto dto) {
@@ -31,11 +34,21 @@ public class OrderService {
         return entity.getUuid();
     }
 
-    public void findAll() {
-
+    /**
+     * 1. 조회를 위한 키값 인자로 받기
+     * 2. orderRepository.findById(uuid) -> 조회 (영속화된 엔티ㅣㅌ)
+     * 3. entity -> dto
+     */
+    @Transactional
+    public OrderDto findOne(String uuid) throws ChangeSetPersister.NotFoundException {
+        return orderRepository.findById(uuid)
+                .map(orderConverter::convertOrderDto)
+                .orElseThrow(ChangeSetPersister.NotFoundException::new);
     }
 
-    public void findOne() {
-
+    @Transactional
+    public Page<OrderDto> findAll(Pageable pageable) {
+        return orderRepository.findAll(pageable)
+                .map(orderConverter::convertOrderDto);
     }
 }
